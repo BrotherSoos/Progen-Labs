@@ -3,7 +3,15 @@ guid: 2e2696b55efd13f499329b6adada7691
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefab_water: {fileID: 8391152383886972511, guid: aeda547f59e4b61438472d1082bd5ad2,
+      type: 3}
+  - prefab_sand: {fileID: 8775986792509631132, guid: fe7db5e164f8b954eb640f4d821c658a,
+      type: 3}
+  - prefab_hill: {fileID: 44401968492575938, guid: 80e1d03fd3d0da44b880905de44a1d70,
+      type: 3}
+  - prefab_plains: {fileID: 3536824186797555819, guid: 2b124170bd878834bb86302e6981c439,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
