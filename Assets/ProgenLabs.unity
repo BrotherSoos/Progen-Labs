@@ -211,6 +211,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6704180623116896721, guid: b713310b39eab75489e182b6cc6bd937,
+        type: 3}
+      propertyPath: prefab_hill
+      value: 
+      objectReference: {fileID: 5055957760211578399, guid: 1b1871bddc49c754bb999060370de5fd,
+        type: 3}
     - target: {fileID: 4587697323326533643, guid: b713310b39eab75489e182b6cc6bd937,
         type: 3}
       propertyPath: m_RootOrder

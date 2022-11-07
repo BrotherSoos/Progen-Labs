@@ -15,28 +15,44 @@ public class PerlinNoiseTileSet : MonoBehaviour
 
     private TilemapTextureSpread textureScript;
 
-    int map_width = 300;
-    int map_height = 300;
+    int map_width = 1920;
+    int map_height = 1920;
 
     private int renderProgress = 0;
     private int renderIncrement = 300;
+    public float noiseModifier = 0.5f;
 
     List<List<int>> noise_grid = new List<List<int>>();
-    List<List<GameObject>> tile_grid = new List<List<GameObject>>();
+
+    Dictionary<int, GameObject> textureLayers = new Dictionary<int, GameObject>();
 
     float magnification = 0.01f;
 
     int x_offset = 0;
+    int x2= 0;
+    int x3= 0;
     int y_offset = 0;
+    int y2= 0;
+    int y3= 0;
 
     // Start is called before the first frame update
     void Start()
     {
         textureScript = gameObject.GetComponent<TilemapTextureSpread>();
         textureScript.SetupPrefabs(map_width, map_height);
+        x_offset = UnityEngine.Random.Range(-10000, +10000);
+        y_offset = UnityEngine.Random.Range(-10000, +10000);
+        y2= UnityEngine.Random.Range(-10000, +10000);
+        y3= UnityEngine.Random.Range(-10000, +10000);
+        x2= UnityEngine.Random.Range(-10000, +10000);
+        x3= UnityEngine.Random.Range(-10000, +10000);
         CreateTileSet();
         CreateTileGroup();
+        textureScript.InitRawTextures(tileset);
+        textureLayers = textureScript.cleanLayers(tileset, map_width, map_height);
         GenerateMap();
+        textureScript.ApplyLayers();
+        Debug.Log("Done ---");
     }
 
     private void GenerateMap()
@@ -44,46 +60,21 @@ public class PerlinNoiseTileSet : MonoBehaviour
         for(int x = 0; x < map_width; x++)
         {
             noise_grid.Add(new List<int>());
-            tile_grid.Add(new List<GameObject>());
             for(int y = 0; y < map_height; y++)
             {
                 int tile_id = GetIdUsingPerlin(x, y);
                 noise_grid[x].Add(tile_id);
-                CreateTile(tile_id, x, y);
+                textureScript.InterpolateTexture(tile_id, tileset[tile_id], textureLayers[tile_id], map_width, map_height, x, y);
             }
         }
     }
 
-    void Update()
-    {
-        if (renderProgress >= map_height*map_width)
-        {
-            return;
-        }
-        
-        for (int i = renderProgress; i < renderProgress + renderIncrement ; i++)
-        {
-            int x = i % map_width;
-            int y = i / map_width;
-            tile_grid[x][y] = textureScript.InterpolateTexture(tile_grid[x][y], map_width, map_height, x, y);
-        }
-        renderProgress += renderIncrement;
-    }
-
-    private void CreateTile(int tile_id, int x, int y)
-    {
-        GameObject tile_prefab = tileset[tile_id];
-        GameObject tile_group = tile_groups[tile_id];
-        GameObject tile = Instantiate(tile_prefab, tile_group.transform);
-        //tile = textureScript.InterpolateTexture(tile, map_width, map_height, x, y);
-        tile_grid[x].Add(tile);
-        tile.name = string.Format("tile_x{0}_y{1}", x, y);
-        tile.transform.localPosition = new Vector3(x, y, 0);
-    }
 
     private int GetIdUsingPerlin(int x, int y)
     {
-        float raw_perlin = Mathf.PerlinNoise((x - x_offset) * magnification, (y - y_offset) * magnification);
+        float raw_perlin = (Mathf.PerlinNoise((x - x_offset) * magnification / 10, (y - y_offset) * magnification / 10)); 
+        raw_perlin += (Mathf.PerlinNoise((x - x2) * magnification * 4, (y - y2) * magnification*4)-0.5f) * 0.0675f;
+        raw_perlin += (Mathf.PerlinNoise((x - x3) * magnification, (y - y3) * magnification) -0.5f) / 3.5f;
         float clamp_perlin = Mathf.Clamp(raw_perlin, 0.0f, 1.0f);
         float scale_perlin = clamp_perlin * tileset.Count;
 
@@ -100,6 +91,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         tile_groups = new Dictionary<int, GameObject>();
         foreach(KeyValuePair<int, GameObject> prefab_pair in tileset)
         {
+            Debug.Log(prefab_pair.Value.name);
             GameObject tile_group = new GameObject(prefab_pair.Value.name);
             tile_group.transform.parent = gameObject.transform;
             tile_group.transform.localPosition = new Vector3(0,0,0);
@@ -118,6 +110,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         tileset.Add(5, prefab_plains);
         tileset.Add(6, prefab_hill);
         tileset.Add(7, prefab_hill);
+        noiseModifier /=  tileset.Count;
     }
 
 

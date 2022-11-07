@@ -275,10 +275,11 @@ MonoBehaviour:
     type: 3}
   prefab_sand: {fileID: 8775986792509631132, guid: fe7db5e164f8b954eb640f4d821c658a,
     type: 3}
-  prefab_hill: {fileID: 44401968492575938, guid: 80e1d03fd3d0da44b880905de44a1d70,
+  prefab_hill: {fileID: 5055957760211578399, guid: 1b1871bddc49c754bb999060370de5fd,
     type: 3}
   prefab_plains: {fileID: 3536824186797555819, guid: 2b124170bd878834bb86302e6981c439,
     type: 3}
+  noiseModifier: 0.5
 --- !u!1839735485 &7477447562380951685
 Tilemap:
   m_ObjectHideFlags: 0
