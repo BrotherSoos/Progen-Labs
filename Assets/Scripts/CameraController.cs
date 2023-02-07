@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    private float ScrollSpeed = 2000;
+    [SerializeField]
+    private float ScrollSpeed;
 
     private Camera camera;
     private float StartSize;
+    [SerializeField]
+    private float maxZoom;
 
-    private Vector3 Origin;
-    private Vector3 Difference;
-    private Vector3 ResetCamera;
+    private Vector3 dragOrigin;
 
-    private bool drag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,44 +21,41 @@ public class CameraController : MonoBehaviour
         camera = Camera.main;
         StartSize = camera.orthographicSize;
 
-        ResetCamera = camera.transform.position;
+       
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
-        if (camera.orthographicSize <= StartSize)
-        {
-            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed;  
-        } else
-        {
-            camera.orthographicSize = StartSize;
-        }
-
-        if(Input.GetMouseButton(0))
-        {
-            Difference = camera.ScreenToWorldPoint(Input.mousePosition) - camera.transform.position;
-            if (drag == false)
-            {
-                drag = true;
-                Origin = camera.ScreenToWorldPoint(Input.mousePosition);
-            }
-            else
-            {
-                drag = false;
-            }
-
-            if (drag)
-            {
-                Debug.Log(Origin - Difference);
-                camera.transform.position = Origin - Difference;
-            }
-
-            if (Input.GetMouseButton(1))
-            {
-                camera.transform.position = ResetCamera;
-            }
-        }
-        
+        HandleScrolling();
+        HandleMouseDrag();
     }
+
+    private void HandleScrolling()
+    {
+        if ((camera.orthographicSize - Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed < StartSize) && (camera.orthographicSize - Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed > maxZoom))
+        {
+            camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * ScrollSpeed;
+        }
+        else if (camera.orthographicSize < StartSize / 2)
+        {
+            camera.orthographicSize = maxZoom + 1;
+        }
+    }
+
+    private void HandleMouseDrag()
+    {
+        if (Input.GetMouseButtonDown(2))
+            dragOrigin = camera.ScreenToWorldPoint(Input.mousePosition);
+       
+
+        if (Input.GetMouseButton(2))
+        {
+            Vector3 difference = dragOrigin - camera.ScreenToWorldPoint(Input.mousePosition);
+
+            camera.transform.position += difference;
+        }
+    }
+
+
 }
