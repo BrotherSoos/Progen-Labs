@@ -12,6 +12,8 @@ MonoImporter:
       type: 3}
   - prefab_plains: {fileID: 3536824186797555819, guid: 2b124170bd878834bb86302e6981c439,
       type: 3}
+  - prefab_mountain: {fileID: 3220056369792280534, guid: 7d86830e86dc94106bde687062fb9985,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
