@@ -14,8 +14,8 @@ public class PineForest : Biome
     private int Density;
 
     static PineForest() {
-      sandTexture = Resources.Load("Assets/Prefab/plains_2") as GameObject;
-      plainsTexture = Resources.Load("Assets/Prefab/sand") as GameObject;
+      plainsTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/plains_2.prefab", typeof(GameObject)) as GameObject;
+      sandTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/sand.prefab", typeof(GameObject)) as GameObject;
       propFolder = "Assets/Prefabs/Biomes/Props/PineForest";
     }
     public PineForest(float biomeStart, float biomeEnd, float propStart, float propEnd, float heightConstraintStart, float heightConstraintEnd, float BiomeDominance, int Density) 

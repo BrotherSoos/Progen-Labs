@@ -67,7 +67,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         x3= UnityEngine.Random.Range(-10000, +10000);
         CreateTileSet();
         CreateTileGroup();
-        textureScript.InitRawTextures(tileset);
+        InitRawTextures("Assets/Prefabs/Textures");
         textureLayers = textureScript.cleanLayers(tileset, MapWidth, MapHeight);
         GenerateMap();
         textureScript.ApplyLayers();
@@ -90,14 +90,12 @@ public class PerlinNoiseTileSet : MonoBehaviour
                // Debug.Log("tileset " + tile_id);
                 //Debug.Log(" is in both" + tileset[tile_id] + " asdf "+  textureLayers[tile_id]);
                 GameObject texture = tileset[tile_id];
-                if(BiomeManager.GetDominantBiome(x,y) != null) {
-                  Debug.Log("Dominant custom texture");
+                if(BiomeManager.HasDominantBiome(x,y)) {
                   if(tile_id >= waterLayers && tile_id < waterLayers+sandLayers) {
                     texture = BiomeManager.GetDominantBiome(x,y).textureSand;
                   }
                   if(tile_id >= waterLayers+sandLayers && tile_id < waterLayers+sandLayers+plainsLayers) {
                     texture = BiomeManager.GetDominantBiome(x,y).texturePlains;
-                    Debug.Log("Choosing custom texture");
                   }
                 }
                 textureScript.InterpolateTexture(tile_id, texture, textureLayers[tile_id], MapWidth, MapHeight, x, y);
@@ -153,7 +151,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
             tileset.Add(i, prefab_hill);
           }
         }
-        BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, tileset, gameObject);
+        BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, 3,  tileset, gameObject);
         noiseModifier /=  (tileset.Count);
     }
 
@@ -231,6 +229,20 @@ public class PerlinNoiseTileSet : MonoBehaviour
       PlayerPrefs.SetInt("mapWidth", MapWidth);
       PlayerPrefs.SetInt("mapHeight", MapHeight);
       PlayerPrefs.SetFloat("mountainSize", mountainSize);
+    }
+
+    void InitRawTextures(string directory) {
+      Dictionary<int, Color32[]> rawTextures = new Dictionary<int, Color32[]>();
+      string[] textures = AssetDatabase.FindAssets("t:prefab", new string[]{directory});
+        foreach(string guid in textures)
+        {
+          var path = AssetDatabase.GUIDToAssetPath(guid);
+          GameObject go = (AssetDatabase.LoadAssetAtPath<GameObject>(path));
+          Texture2D texture = go.GetComponent<SpriteRenderer>().sprite.texture;
+          Debug.Log("Adding " + texture.GetInstanceID());
+          rawTextures.Add(texture.GetInstanceID(), texture.GetRawTextureData<Color32>().ToArray());
+        }
+      textureScript.InitRawTextures(rawTextures);
     }
 }
 

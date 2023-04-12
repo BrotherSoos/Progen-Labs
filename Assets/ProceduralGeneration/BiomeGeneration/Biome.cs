@@ -52,6 +52,7 @@ public abstract class Biome: MonoBehaviour
           var path = AssetDatabase.GUIDToAssetPath( guid );
           props.Add(AssetDatabase.LoadAssetAtPath<GameObject>( path ));
       }
+      Debug.Log("tex " + texturePlains + " " + texturePlains.GetInstanceID());
     }
 
     public virtual GameObject GetRandomProp() {

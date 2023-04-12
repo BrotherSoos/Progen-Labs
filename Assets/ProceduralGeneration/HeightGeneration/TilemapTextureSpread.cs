@@ -67,7 +67,7 @@ public class TilemapTextureSpread : MonoBehaviour
             int skippableColors = i * texture.width;
             for (int j = startX; j <= endX; j++)
             {
-                section[skippableSection + j] = rawTextures[layerId][skippableColors + j];
+                section[skippableSection + j] = rawTextures[texture.GetInstanceID()][skippableColors + j];
             }
         }
         return section;
@@ -115,12 +115,9 @@ public class TilemapTextureSpread : MonoBehaviour
         return las;
     }
 
-    public void InitRawTextures(Dictionary<int, GameObject> textures)
+    public void InitRawTextures(Dictionary<int, Color32[]> textures)
     {
-        foreach(KeyValuePair<int, GameObject> prefab_pair in textures)
-        {
-            rawTextures.Add(prefab_pair.Key, prefab_pair.Value.GetComponent<SpriteRenderer>().sprite.texture.GetRawTextureData<Color32>().ToArray());
-        }
+      rawTextures = textures;
     }
 
     public void SetupPrefabs(int mapWidth, int mapHeight)
@@ -164,6 +161,7 @@ public class TilemapTextureSpread : MonoBehaviour
 
         prefabs.Add("sand", sand);
         prefabs.Add("plains", plains);
+        prefabs.Add("plains_2", plains);
         prefabs.Add("hill", hills);
         prefabs.Add("water", water);
     }
