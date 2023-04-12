@@ -15,6 +15,11 @@ public class FollowScript : MonoBehaviour
         {
             this.gameObject.transform.localScale = new Vector3(scaleSlider.GetComponent<Slider>().value * 15, scaleSlider.GetComponent<Slider>().value * 15, 0);
         }
+        Debug.Log("-" + this.gameObject.name + "-");
+        if (this.gameObject.name == "StoneWayDrag(Clone)")
+        {
+            this.gameObject.transform.localScale = new Vector3(scaleSlider.GetComponent<Slider>().value * 15, scaleSlider.GetComponent<Slider>().value * 15, 0);
+        }
     }
 
     private void Update()

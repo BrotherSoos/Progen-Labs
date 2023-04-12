@@ -24,19 +24,7 @@ public class CameraMovement : MonoBehaviour
     private void PanCamera()
     {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            dragOrigin = cam.ScreenToWorldPoint(Input.mousePosition);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 difference = dragOrigin - cam.ScreenToWorldPoint(Input.mousePosition);
-
-            //print("origin " + dragOrigin + " new Position " + cam.ScreenToWorldPoint(Input.mousePosition) + " = difference " + difference);
-
-            cam.transform.position += difference;
-        }
+        
 
     }
 }
