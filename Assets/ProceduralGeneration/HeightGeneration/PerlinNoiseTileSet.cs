@@ -19,15 +19,22 @@ public class PerlinNoiseTileSet : MonoBehaviour
     private List<GameObject> snowless_small_mts = new List<GameObject>();
 
     private TilemapTextureSpread textureScript;
-    public int map_width = 1000;
-    public int map_height = 1000;
+    private BiomeManager BiomeManager;
+    public int MapWidth = 1000;
+    public int MapHeight = 1000;
+
+    int waterLayers = 8;
+        int sandLayers = 1;
+        int plainsLayers = 5;
+        int hillLayers = 7;
 
     private int renderProgress = 0;
     private int renderIncrement = 300;
     public float noiseModifier = 0.5f;
 
-    List<List<int>> noise_grid = new List<List<int>>();
-    List<List<float>> precise_grid = new List<List<float>>();
+    List<List<int>> heightLevelGrid = new List<List<int>>();
+    List<List<int>> biomeGrid = new List<List<int>>();
+    List<List<float>> heightGrid = new List<List<float>>();
 
     Dictionary<int, GameObject> textureLayers = new Dictionary<int, GameObject>();
 
@@ -51,7 +58,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
     {
         LoadMountainTextures();
         textureScript = gameObject.GetComponent<TilemapTextureSpread>();
-        textureScript.SetupPrefabs(map_width, map_height);
+        textureScript.SetupPrefabs(MapWidth, MapHeight);
         x_offset = UnityEngine.Random.Range(-10000, +10000);
         y_offset = UnityEngine.Random.Range(-10000, +10000);
         y2= UnityEngine.Random.Range(-10000, +10000);
@@ -61,7 +68,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         CreateTileSet();
         CreateTileGroup();
         textureScript.InitRawTextures(tileset);
-        textureLayers = textureScript.cleanLayers(tileset, map_width, map_height);
+        textureLayers = textureScript.cleanLayers(tileset, MapWidth, MapHeight);
         GenerateMap();
         textureScript.ApplyLayers();
         Debug.Log("Done ---");
@@ -70,21 +77,33 @@ public class PerlinNoiseTileSet : MonoBehaviour
     private void GenerateMap()
     {
       //List<Coordinate> mountainCoordinates = new List();
-        for(int x = 0; x < map_width; x++)
+        for(int x = 0; x < MapWidth; x++)
         {
-            noise_grid.Add(new List<int>());
-            precise_grid.Add(new List<float>());
-            for(int y = 0; y < map_height; y++)
+            heightLevelGrid.Add(new List<int>());
+            heightGrid.Add(new List<float>());
+            for(int y = 0; y < MapHeight; y++)
             {
                 float noise = GetIdUsingPerlin(x, y);
-                precise_grid[x].Add(noise);
+                heightGrid[x].Add(noise);
                 int tile_id = Mathf.FloorToInt(noise);
-                noise_grid[x].Add(tile_id);
+                heightLevelGrid[x].Add(tile_id);
                // Debug.Log("tileset " + tile_id);
                 //Debug.Log(" is in both" + tileset[tile_id] + " asdf "+  textureLayers[tile_id]);
-                textureScript.InterpolateTexture(tile_id, tileset[tile_id], textureLayers[tile_id], map_width, map_height, x, y);
+                GameObject texture = tileset[tile_id];
+                if(BiomeManager.GetDominantBiome(x,y) != null) {
+                  Debug.Log("Dominant custom texture");
+                  if(tile_id >= waterLayers && tile_id < waterLayers+sandLayers) {
+                    texture = BiomeManager.GetDominantBiome(x,y).textureSand;
+                  }
+                  if(tile_id >= waterLayers+sandLayers && tile_id < waterLayers+sandLayers+plainsLayers) {
+                    texture = BiomeManager.GetDominantBiome(x,y).texturePlains;
+                    Debug.Log("Choosing custom texture");
+                  }
+                }
+                textureScript.InterpolateTexture(tile_id, texture, textureLayers[tile_id], MapWidth, MapHeight, x, y);
             }
         }
+        BiomeManager.ApplyBiome("pine-forest", heightGrid);
         SetMountains();
     }
 
@@ -119,10 +138,6 @@ public class PerlinNoiseTileSet : MonoBehaviour
     void CreateTileSet()
     {
         tileset = new Dictionary<int, GameObject>();
-        int waterLayers = 8;
-        int sandLayers = 1;
-        int plainsLayers = 5;
-        int hillLayers = 7;
         int sum = waterLayers + sandLayers + plainsLayers + hillLayers;
         for(int i = 0; i < sum; i++) {
           if(i < waterLayers) {
@@ -138,16 +153,17 @@ public class PerlinNoiseTileSet : MonoBehaviour
             tileset.Add(i, prefab_hill);
           }
         }
+        BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, tileset, gameObject);
         noiseModifier /=  (tileset.Count);
     }
 
 
     void SetMountains() {
-      for(int x = 0; x < map_width; x++)
+      for(int x = 0; x < MapWidth; x++)
         {
-            for(int y = 0; y < map_height; y++)
+            for(int y = 0; y < MapHeight; y++)
             {
-              float noise = precise_grid[x][y];
+              float noise = heightGrid[x][y];
               PlaceMountain(noise, x, y);
             }
         }
@@ -155,11 +171,11 @@ public class PerlinNoiseTileSet : MonoBehaviour
     bool checkAdjacent(int x, int y, float noise, int rasterSize) {
       int startmaxX = Math.Max(0, x-rasterSize);
       int startmaxY = Math.Max(0, y-rasterSize);
-      int endminX = Math.Min(precise_grid.Count-1, x+rasterSize);
-      int endminY = Math.Min(precise_grid[x].Count-1, y+rasterSize);
+      int endminX = Math.Min(heightGrid.Count-1, x+rasterSize);
+      int endminY = Math.Min(heightGrid[x].Count-1, y+rasterSize);
       for(int xi = startmaxX; xi <= endminX; xi++) {
         for(int yi = startmaxY; yi <= endminY; yi++) {
-          if(precise_grid[xi][yi] > noise) {
+          if(heightGrid[xi][yi] > noise) {
             return false;
           }
         }
@@ -205,13 +221,15 @@ public class PerlinNoiseTileSet : MonoBehaviour
         return;
       }
         go.transform.parent = gameObject.transform;
-        go.transform.localPosition = new Vector3((x-map_width/2)*10, (y-map_height/2)*10, 1);
-        go.transform.localScale = new Vector3(map_width/mountainSize, map_height/mountainSize, 1);
+        go.transform.localPosition = new Vector3((x-MapWidth/2)*10, (y-MapHeight/2)*10, 1);
+        go.transform.localScale = new Vector3(MapWidth/mountainSize, MapHeight/mountainSize, 1);
+        SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+        renderer.sortingOrder = 1000000+y;
     }
 
     void SetGlobalVariables() {
-      PlayerPrefs.SetInt("mapWidth", map_width);
-      PlayerPrefs.SetInt("mapHeight", map_height);
+      PlayerPrefs.SetInt("mapWidth", MapWidth);
+      PlayerPrefs.SetInt("mapHeight", MapHeight);
       PlayerPrefs.SetFloat("mountainSize", mountainSize);
     }
 }
