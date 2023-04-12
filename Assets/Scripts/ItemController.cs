@@ -26,7 +26,7 @@ public class ItemController : MonoBehaviour
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
         GameObject go = Instantiate(editor.itemImage[ID], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
         go.GetComponent<Renderer>().sortingOrder = 5;
-        go.transform.localScale = new Vector3(25 * scaleSlider.GetComponent<Slider>().value, 25 * scaleSlider.GetComponent<Slider>().value, 0);
+        go.transform.localScale = new Vector3(200 * scaleSlider.GetComponent<Slider>().value, 200 * scaleSlider.GetComponent<Slider>().value, 0);
         editor.currentButtonPressed = ID;
     }
 }

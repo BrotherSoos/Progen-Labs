@@ -28,7 +28,7 @@ public class ReadInput : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && textFinished)
         {
             GameObject go = Instantiate(textPrefabs, new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
-            go.transform.localScale = new Vector3(35 * scaleSlider.GetComponent<Slider>().value, 35 * scaleSlider.GetComponent<Slider>().value, 0);
+            go.transform.localScale = new Vector3(5*scaleSlider.GetComponent<Slider>().value, 5*scaleSlider.GetComponent<Slider>().value, 0);
             go.GetComponent<Renderer>().sortingOrder = 5;
             go.GetComponent<TextMesh>().text = input;
             textFinished = false;
