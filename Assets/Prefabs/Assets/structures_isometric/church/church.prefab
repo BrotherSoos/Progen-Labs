@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9083265578039467877}
   - component: {fileID: -3129167350760963058}
   - component: {fileID: -675979182170701924}
+  - component: {fileID: -4970912502061378763}
   m_Layer: 0
   m_Name: church
   m_TagString: Untagged
@@ -123,3 +124,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.17, y: 1.6}
   m_EdgeRadius: 0
+--- !u!114 &-4970912502061378763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3419720280544550338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdbb81db2d71f144bb6bcdb39eb2d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

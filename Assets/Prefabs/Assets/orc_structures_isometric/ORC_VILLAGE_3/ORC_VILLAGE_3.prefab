@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7120276405496336988}
   - component: {fileID: 1847445980646447694}
   - component: {fileID: 8655397784247625415}
+  - component: {fileID: -2715335097121125091}
   m_Layer: 0
   m_Name: ORC_VILLAGE_3
   m_TagString: Untagged
@@ -123,3 +124,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 6
   editor: {fileID: 0}
+--- !u!114 &-2715335097121125091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570515246013006149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdbb81db2d71f144bb6bcdb39eb2d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

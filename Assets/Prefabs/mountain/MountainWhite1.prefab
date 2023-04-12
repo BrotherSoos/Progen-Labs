@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5811559214695331058}
   - component: {fileID: 1847767895698402344}
   - component: {fileID: 8317621117880046058}
+  - component: {fileID: -926511509109415375}
   m_Layer: 0
   m_Name: MountainWhite1
   m_TagString: Untagged
@@ -123,3 +124,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 4
   editor: {fileID: 0}
+--- !u!114 &-926511509109415375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406986425225193895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdbb81db2d71f144bb6bcdb39eb2d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
