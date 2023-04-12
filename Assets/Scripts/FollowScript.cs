@@ -10,15 +10,17 @@ public class FollowScript : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("-" + this.gameObject.name + "-");
         if (this.gameObject.name == "drag_sand(Clone)")
         {
             this.gameObject.transform.localScale = new Vector3(scaleSlider.GetComponent<Slider>().value * 15, scaleSlider.GetComponent<Slider>().value * 15, 0);
         }
-        Debug.Log("-" + this.gameObject.name + "-");
-        if (this.gameObject.name == "StoneWayDrag(Clone)")
+        else if (this.gameObject.name == "StoneWayDrag(Clone)")
         {
             this.gameObject.transform.localScale = new Vector3(scaleSlider.GetComponent<Slider>().value * 15, scaleSlider.GetComponent<Slider>().value * 15, 0);
+        }
+        else
+        {
+            this.gameObject.transform.localScale = new Vector3(scaleSlider.GetComponent<Slider>().value * 200, scaleSlider.GetComponent<Slider>().value * 200, 0);
         }
     }
 

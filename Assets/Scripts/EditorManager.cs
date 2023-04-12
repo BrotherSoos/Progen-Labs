@@ -19,8 +19,9 @@ public class EditorManager : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(2) && currentButtonPressed > 15)
+        if (Input.GetMouseButtonDown(2) && currentButtonPressed > 15 && itemButtons[currentButtonPressed].clicked)
         {
+            itemButtons[currentButtonPressed].clicked = false;
             mouseXStart = Input.mousePosition.x;
             mouseYStart = Input.mousePosition.y;
 
@@ -33,8 +34,9 @@ public class EditorManager : MonoBehaviour
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
-        else if (Input.GetMouseButtonDown(0) && currentButtonPressed < 16)
+        else if (Input.GetMouseButtonDown(0) && currentButtonPressed < 16 && itemButtons[currentButtonPressed].clicked)
         {
+            itemButtons[currentButtonPressed].clicked = false;
             Vector2 screenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
@@ -44,8 +46,9 @@ public class EditorManager : MonoBehaviour
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
-        if (Input.GetMouseButtonUp(2) && currentButtonPressed>15)
+        if (Input.GetMouseButtonUp(2) && currentButtonPressed > 15)
         {
+            itemButtons[currentButtonPressed].clicked = false;
             mouseYEnd = Input.mousePosition.y;
             mouseXEnd = Input.mousePosition.x;
             Debug.Log(mouseXStart + " //// " + mouseXEnd);
@@ -69,9 +72,9 @@ public class EditorManager : MonoBehaviour
 
                                 Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                             }
-                            Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                           
                         }
-                        Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                        
                     }
                     else
                     {
@@ -84,14 +87,13 @@ public class EditorManager : MonoBehaviour
                             go.transform.localScale = new Vector3(10 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
                             go.GetComponent<Renderer>().sortingOrder = 5;
 
-
                             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                         }
-                        Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                        
                     }
-                    Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                    
                 }
-                Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                
             }
             else
             {
@@ -110,7 +112,7 @@ public class EditorManager : MonoBehaviour
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                     }
-                    Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                    
                 }
                 else
                 {
@@ -126,12 +128,12 @@ public class EditorManager : MonoBehaviour
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                     }
-                    Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                    
                 }
-                Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+                
             }
-            Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+            
         }
-        Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
+        
     }
 }

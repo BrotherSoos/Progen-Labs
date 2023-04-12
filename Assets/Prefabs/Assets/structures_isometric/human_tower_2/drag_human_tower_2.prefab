@@ -94,3 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7d1633abcef7a4888f032b9fc95bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleSlider: {fileID: 7826010694615848343, guid: e96bb447f8cd1614ba7f6438d60499e7,
+    type: 3}

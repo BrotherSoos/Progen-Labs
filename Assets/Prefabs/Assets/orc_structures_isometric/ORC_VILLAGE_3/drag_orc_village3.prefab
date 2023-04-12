@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7d1633abcef7a4888f032b9fc95bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleSlider: {fileID: 3208242415174085497, guid: 63d09cc971aeffe4281b149d2a018de4,
+    type: 3}
 --- !u!1001 &1675313885365054725
 PrefabInstance:
   m_ObjectHideFlags: 0
