@@ -98,6 +98,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         }
         BiomeManager.ApplyBiome("pine-forest", heightGrid);
         BiomeManager.ApplyBiome("green-forest", heightGrid);
+        BiomeManager.ApplyBiome("cities", heightGrid);
         SetMountains();
     }
 

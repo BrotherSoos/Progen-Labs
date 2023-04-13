@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class PineForest : Biome
+public class Cities : Biome
 {
     private ManhattanGrid manhattanGrid = null;
 
@@ -14,13 +14,13 @@ public class PineForest : Biome
     static readonly string propFolder;
     private int Density;
 
-    static PineForest() {
-      plainsTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/plains_2.prefab", typeof(GameObject)) as GameObject;
+    static Cities() {
+      plainsTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/plains.prefab", typeof(GameObject)) as GameObject;
       sandTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/sand.prefab", typeof(GameObject)) as GameObject;
-      propFolder = "Assets/Prefabs/Biomes/Props/PineForest";
+      propFolder = "Assets/Prefabs/Biomes/Props/Cities";
     }
-    public PineForest(float biomeStart, float biomeEnd, float propStart, float propEnd, float heightConstraintStart, float heightConstraintEnd, float BiomeDominance, int Density) 
-    : base("pine-forest", 1, sandTexture, plainsTexture, biomeStart, biomeEnd, propFolder, propStart, propEnd, heightConstraintStart, heightConstraintEnd, BiomeDominance)
+    public Cities(float biomeStart, float biomeEnd, float propStart, float propEnd, float heightConstraintStart, float heightConstraintEnd, float BiomeDominance, int Density) 
+    : base("cities", 1, sandTexture, plainsTexture, biomeStart, biomeEnd, propFolder, propStart, propEnd, heightConstraintStart, heightConstraintEnd, BiomeDominance)
     {
       this.Density = Density;
     }
@@ -77,7 +77,7 @@ public class PineForest : Biome
       go.transform.localPosition = new Vector3((x-width/2)*10, (y-height/2)*10, 1);
       go.transform.localScale = new Vector3(width/5f, height/5f, 1);
       SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
-      renderer.sortingOrder = (int)(BiomeDominance)+1;
+      renderer.sortingOrder = (int)(BiomeDominance)+7;
       instantiatedExtras.Add(go);
     }
 }

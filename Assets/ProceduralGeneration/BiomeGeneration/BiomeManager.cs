@@ -61,8 +61,10 @@ public class BiomeManager : MonoBehaviour
     this.biomes = new Dictionary<int, Biome>();
     Biome pineForest = new PineForest(0.7f, 1.1f, 0.7f, 1.1f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 10,7);
     Biome greenForest = new GreenForest(1.2f, 1.3f, 1.2f, 1.3f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 8,9);
+    Biome cities = new Cities(0.2f, 1.1f, 0.2f, 1.1f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 4,70);
     this.biomes.Add(1, pineForest);
     this.biomes.Add(2, greenForest);
+    this.biomes.Add(3, cities);
   }
 
   private double FindPerlin(int x, int y, float range)

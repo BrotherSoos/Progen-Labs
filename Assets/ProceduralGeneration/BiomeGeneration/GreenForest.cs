@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class GreenForest : Biome
 {
-    private HamiltonGrid hamiltonGrid = null;
+    private ManhattanGrid manhattanGrid = null;
 
     static readonly GameObject sandTexture;
     static readonly GameObject plainsTexture;
@@ -39,8 +39,8 @@ public class GreenForest : Biome
       height = noise[0].Count;
       this.heights = heightMap;
       this.parent = parent;
-        if(hamiltonGrid == null) {
-          hamiltonGrid = new HamiltonGrid(this.noise);
+        if(manhattanGrid == null) {
+          manhattanGrid = new ManhattanGrid(this.noise);
         }
         hamiltonIteration(0,0, Density);
     }
@@ -49,15 +49,15 @@ public class GreenForest : Biome
       if(visitedCenters.ContainsKey(x) && visitedCenters[x].Contains(y)) {
         return;
       }
-      double max = hamiltonGrid.FindMaxInHamilton(x, y, Density);
+      double max = manhattanGrid.FindMaxInHamilton(x, y, Density);
       if(!visitedCenters.ContainsKey(x)) {
         visitedCenters.Add(x, new List<int>());
       }
       visitedCenters[x].Add(y);
-      if(IsPropToBePlaced(noise[hamiltonGrid.x][hamiltonGrid.y])) {
-        if(heights[hamiltonGrid.x][hamiltonGrid.y] > heightConstraintStart && 
-           heights[hamiltonGrid.x][hamiltonGrid.y] <= heightConstraintEnd) {
-          placeProp(hamiltonGrid.x, hamiltonGrid.y);
+      if(IsPropToBePlaced(noise[manhattanGrid.x][manhattanGrid.y])) {
+        if(heights[manhattanGrid.x][manhattanGrid.y] > heightConstraintStart && 
+           heights[manhattanGrid.x][manhattanGrid.y] <= heightConstraintEnd) {
+          placeProp(manhattanGrid.x, manhattanGrid.y);
         }
       }
       if(x + (distance+1)*2 < width) {

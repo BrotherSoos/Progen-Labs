@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class HamiltonGrid
+public class ManhattanGrid
 {
     public int x;
     public double globMax;
     public int y;
-    public HamiltonGrid(List<List<double>> values) {
+    public ManhattanGrid(List<List<double>> values) {
       this.values = values;
       this.visited = new List<List<bool>>();
       for(int i = 0; i < values.Count; i++) {
