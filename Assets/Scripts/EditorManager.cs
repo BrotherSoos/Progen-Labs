@@ -32,7 +32,7 @@ public class EditorManager : MonoBehaviour
 
             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
             go.transform.localScale = new Vector3(dragSlider.GetComponent<Slider>().value * 10, dragSlider.GetComponent<Slider>().value * 10, 0);
-            go.GetComponent<Renderer>().sortingOrder = 5;
+            go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
@@ -46,7 +46,7 @@ public class EditorManager : MonoBehaviour
 
             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
             go.transform.localScale = new Vector3(200 * scaleSlider.GetComponent<Slider>().value, 200 * scaleSlider.GetComponent<Slider>().value, 0);
-            go.GetComponent<Renderer>().sortingOrder = 5;
+            go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
@@ -72,7 +72,7 @@ public class EditorManager : MonoBehaviour
 
                                 GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                                 go.transform.localScale = new Vector3(20 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                                go.GetComponent<Renderer>().sortingOrder = 5;
+                                go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
                                 Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                             }
@@ -89,7 +89,7 @@ public class EditorManager : MonoBehaviour
 
                             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                             go.transform.localScale = new Vector3(10 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                            go.GetComponent<Renderer>().sortingOrder = 5;
+                            go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
                             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                         }
@@ -112,7 +112,7 @@ public class EditorManager : MonoBehaviour
 
                         GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                         go.transform.localScale = new Vector3(20 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                        go.GetComponent<Renderer>().sortingOrder = 5;
+                        go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                     }
@@ -127,7 +127,7 @@ public class EditorManager : MonoBehaviour
 
                         GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                         go.transform.localScale = new Vector3(10 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                        go.GetComponent<Renderer>().sortingOrder = 5;
+                        go.GetComponent<Renderer>().sortingOrder = 1000000000;
 
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));

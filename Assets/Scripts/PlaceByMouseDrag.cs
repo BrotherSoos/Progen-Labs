@@ -10,6 +10,7 @@ public class PlaceByMouseDrag : MonoBehaviour
     public bool clicked;
     private EditorManager editor;
     private GameObject scaleSlider;
+    private List<GameObject> placedObjects = new List<GameObject>();
 
     void Start()
     {
@@ -27,11 +28,17 @@ public class PlaceByMouseDrag : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             GameObject go = Instantiate(editor.itemImage[ID], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
-            go.GetComponent<Renderer>().sortingOrder = 5;
+            go.GetComponent<Renderer>().sortingOrder = 1000000000;
             go.transform.localScale = new Vector3(200 * scaleSlider.GetComponent<Slider>().value, 200 * scaleSlider.GetComponent<Slider>().value, 0);
             editor.currentButtonPressed = ID;
-
+            placedObjects.Add(go);
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
+    }
+
+    public void clearInstantiatedExtras() {
+      foreach(GameObject go in placedObjects) {
+        Destroy(go);
+      }
     }
 }

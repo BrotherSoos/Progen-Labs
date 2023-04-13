@@ -8,6 +8,7 @@ public class ItemController : MonoBehaviour
     public int ID;
     public bool clicked;
     private EditorManager editor;
+    private List<GameObject> placedObjects = new List<GameObject>();
     private GameObject scaleSlider;
 
     void Start()
@@ -25,8 +26,15 @@ public class ItemController : MonoBehaviour
         Vector2 screenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
         GameObject go = Instantiate(editor.itemImage[ID], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
-        go.GetComponent<Renderer>().sortingOrder = 5;
+        go.GetComponent<Renderer>().sortingOrder = 1000000000;
         go.transform.localScale = new Vector3(200 * scaleSlider.GetComponent<Slider>().value, 200 * scaleSlider.GetComponent<Slider>().value, 0);
         editor.currentButtonPressed = ID;
+        //placedObjects.Add(go);
+    }
+
+    public void clearInstantiatedExtras() {
+      foreach(GameObject go in placedObjects) {
+        Destroy(go);
+      }
     }
 }

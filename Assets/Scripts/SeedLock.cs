@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class SeedLock : MonoBehaviour
 {
-    private Button btn;
-    public bool seedLocked = false;
+  private Button btn;
+  public bool seedLocked = false;
 
-    void Start()
-    {
-        btn = this.GetComponent<Button>();
-        btn.onClick.AddListener(OnObjectsClick);
-            btn.GetComponent<Image>().color = Color.gray; 
-    }
+  void Start()
+  {
+      btn = this.GetComponent<Button>();
+      btn.onClick.AddListener(OnObjectsClick);
+          btn.GetComponent<Image>().color = Color.gray; 
+  }
 
 
     private void OnObjectsClick()
