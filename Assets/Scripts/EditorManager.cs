@@ -15,6 +15,7 @@ public class EditorManager : MonoBehaviour
     private float mouseXEnd;
     private float mouseYStart;
     private float mouseYEnd;
+    private List<GameObject> placedObjects = new List<GameObject>();
 
     private void Update()
     {
@@ -32,7 +33,9 @@ public class EditorManager : MonoBehaviour
 
             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
             go.transform.localScale = new Vector3(dragSlider.GetComponent<Slider>().value * 10, dragSlider.GetComponent<Slider>().value * 10, 0);
-            go.GetComponent<Renderer>().sortingOrder = 1000000000;
+            go.GetComponent<Renderer>().sortingOrder = 10050;
+
+            placedObjects.Add(go);
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
@@ -46,7 +49,9 @@ public class EditorManager : MonoBehaviour
 
             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
             go.transform.localScale = new Vector3(200 * scaleSlider.GetComponent<Slider>().value, 200 * scaleSlider.GetComponent<Slider>().value, 0);
-            go.GetComponent<Renderer>().sortingOrder = 1000000000;
+            go.GetComponent<Renderer>().sortingOrder = 10050;
+
+            placedObjects.Add(go);
 
             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
         }
@@ -72,7 +77,9 @@ public class EditorManager : MonoBehaviour
 
                                 GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                                 go.transform.localScale = new Vector3(20 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                                go.GetComponent<Renderer>().sortingOrder = 1000000000;
+                                go.GetComponent<Renderer>().sortingOrder = 10050;
+
+                                placedObjects.Add(go);
 
                                 Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                             }
@@ -89,7 +96,9 @@ public class EditorManager : MonoBehaviour
 
                             GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                             go.transform.localScale = new Vector3(10 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                            go.GetComponent<Renderer>().sortingOrder = 1000000000;
+                            go.GetComponent<Renderer>().sortingOrder = 10050;
+
+                            placedObjects.Add(go);
 
                             Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                         }
@@ -112,7 +121,9 @@ public class EditorManager : MonoBehaviour
 
                         GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                         go.transform.localScale = new Vector3(20 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                        go.GetComponent<Renderer>().sortingOrder = 1000000000;
+                        go.GetComponent<Renderer>().sortingOrder = 10050;
+
+                        placedObjects.Add(go);
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                     }
@@ -127,8 +138,9 @@ public class EditorManager : MonoBehaviour
 
                         GameObject go = Instantiate(itemPrefabs[currentButtonPressed], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);
                         go.transform.localScale = new Vector3(10 * dragSlider.GetComponent<Slider>().value, 10 * dragSlider.GetComponent<Slider>().value, 0);
-                        go.GetComponent<Renderer>().sortingOrder = 1000000000;
+                        go.GetComponent<Renderer>().sortingOrder = 10050;
 
+                        placedObjects.Add(go);
 
                         Destroy(GameObject.FindGameObjectWithTag("ItemImage"));
                     }
@@ -140,4 +152,14 @@ public class EditorManager : MonoBehaviour
         }
         
     }
+
+    public void clearInstantiatedExtras()
+    {
+        foreach (GameObject go in placedObjects)
+        {
+            Destroy(go);
+        }
+        placedObjects = new List<GameObject>();
+    }
+
 }

@@ -217,7 +217,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         go.transform.localPosition = new Vector3((x-MapWidth/2)*10, (y-MapHeight/2)*10, 1);
         go.transform.localScale = new Vector3(MapWidth/mountainSize, MapHeight/mountainSize, 1);
         SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
-        renderer.sortingOrder = 1000000+y;
+        renderer.sortingOrder = 1000+y;
         instantiatedExtras.Add(go);
     }
 

@@ -28,7 +28,7 @@ public class RegenerateMap : MonoBehaviour
     private void OnObjectsClick()
     {
       PerlinNoiseTileSet generationScript = (PerlinNoiseTileSet) map.GetComponent(typeof(PerlinNoiseTileSet));
-      PlaceByMouseDrag objectScript = (PlaceByMouseDrag) dragger.GetComponent(typeof(PlaceByMouseDrag));
+      EditorManager objectScript = (EditorManager) dragger.GetComponent(typeof(EditorManager));
       objectScript.clearInstantiatedExtras();
       SeedLock lockScript = (SeedLock) seedLock.GetComponent(typeof(SeedLock));
       Debug.Log("Lock set to " + lockScript.seedLocked);
