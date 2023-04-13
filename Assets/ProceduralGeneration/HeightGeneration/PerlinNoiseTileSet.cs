@@ -18,6 +18,8 @@ public class PerlinNoiseTileSet : MonoBehaviour
     private List<GameObject> large_mts = new List<GameObject>();
     private List<GameObject> snowless_small_mts = new List<GameObject>();
 
+    private List<GameObject> instantiatedExtras = new List<GameObject>();
+
     private TilemapTextureSpread textureScript;
     private BiomeManager BiomeManager;
     public int MapWidth = 1000;
@@ -33,7 +35,6 @@ public class PerlinNoiseTileSet : MonoBehaviour
     public float noiseModifier = 0.5f;
 
     List<List<int>> heightLevelGrid = new List<List<int>>();
-    List<List<int>> biomeGrid = new List<List<int>>();
     List<List<float>> heightGrid = new List<List<float>>();
 
     Dictionary<int, GameObject> textureLayers = new Dictionary<int, GameObject>();
@@ -46,12 +47,8 @@ public class PerlinNoiseTileSet : MonoBehaviour
 
     private float mountainSize = 10f/3f;
 
-    int x_offset = 0;
-    int x2= 0;
-    int x3= 0;
-    int y_offset = 0;
-    int y2= 0;
-    int y3= 0;
+    List<int> OffsetX = new List<int>();
+    List<int> OffsetY = new List<int>();
 
     // Start is called before the first frame update
     void Start()
@@ -59,12 +56,8 @@ public class PerlinNoiseTileSet : MonoBehaviour
         LoadMountainTextures();
         textureScript = gameObject.GetComponent<TilemapTextureSpread>();
         textureScript.SetupPrefabs(MapWidth, MapHeight);
-        x_offset = UnityEngine.Random.Range(-10000, +10000);
-        y_offset = UnityEngine.Random.Range(-10000, +10000);
-        y2= UnityEngine.Random.Range(-10000, +10000);
-        y3= UnityEngine.Random.Range(-10000, +10000);
-        x2= UnityEngine.Random.Range(-10000, +10000);
-        x3= UnityEngine.Random.Range(-10000, +10000);
+        SeedGenerator.generateNew();
+        SeedGenerator.fillOffsets1(OffsetX, OffsetY);
         CreateTileSet();
         CreateTileGroup();
         InitRawTextures("Assets/Prefabs/Textures");
@@ -76,8 +69,10 @@ public class PerlinNoiseTileSet : MonoBehaviour
 
     private void GenerateMap()
     {
-      //List<Coordinate> mountainCoordinates = new List();
-        for(int x = 0; x < MapWidth; x++)
+      BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, 3,  tileset, gameObject);
+      heightLevelGrid = new List<List<int>>();
+      heightGrid = new List<List<float>>();
+      for(int x = 0; x < MapWidth; x++)
         {
             heightLevelGrid.Add(new List<int>());
             heightGrid.Add(new List<float>());
@@ -102,15 +97,16 @@ public class PerlinNoiseTileSet : MonoBehaviour
             }
         }
         BiomeManager.ApplyBiome("pine-forest", heightGrid);
+        BiomeManager.ApplyBiome("green-forest", heightGrid);
         SetMountains();
     }
 
 
     private float GetIdUsingPerlin(int x, int y)
     {
-        float raw_perlin = (Mathf.PerlinNoise((x - x_offset) * magnification / 10, (y - y_offset) * magnification / 10)); 
-        raw_perlin += (Mathf.PerlinNoise((x - x2) * magnification * 4, (y - y2) * magnification*4)-0.5f) * 0.0275f;
-        raw_perlin += (Mathf.PerlinNoise((x - x3) * magnification, (y - y3) * magnification) -0.5f) / 5.5f;
+        float raw_perlin = (Mathf.PerlinNoise((x - OffsetX[0]) * magnification / 10, (y - OffsetY[0]) * magnification / 10)); 
+        raw_perlin += (Mathf.PerlinNoise((x - OffsetX[1]) * magnification * 4, (y - OffsetY[1]) * magnification*4)-0.5f) * 0.0275f;
+        raw_perlin += (Mathf.PerlinNoise((x - OffsetX[2]) * magnification, (y - OffsetY[2]) * magnification) -0.5f) / 5.5f;
         float clamp_perlin = Mathf.Clamp(raw_perlin, 0.0f, 1.0f);
         float scale_perlin = clamp_perlin * (tileset.Count-1);
         if(scale_perlin == tileset.Count)
@@ -151,8 +147,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
             tileset.Add(i, prefab_hill);
           }
         }
-        BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, 3,  tileset, gameObject);
-        noiseModifier /=  (tileset.Count);
+                noiseModifier /=  (tileset.Count);
     }
 
 
@@ -223,6 +218,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         go.transform.localScale = new Vector3(MapWidth/mountainSize, MapHeight/mountainSize, 1);
         SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
         renderer.sortingOrder = 1000000+y;
+        instantiatedExtras.Add(go);
     }
 
     void SetGlobalVariables() {
@@ -243,6 +239,18 @@ public class PerlinNoiseTileSet : MonoBehaviour
           rawTextures.Add(texture.GetInstanceID(), texture.GetRawTextureData<Color32>().ToArray());
         }
       textureScript.InitRawTextures(rawTextures);
+    }
+
+    public void RegenerateMap() {
+        SeedGenerator.fillOffsets1(OffsetX, OffsetY);
+        Debug.Log("Offsets now " + OffsetX[0] + " an "+ OffsetY[0]);
+        textureLayers = textureScript.cleanLayers(tileset, MapWidth, MapHeight);
+        foreach(GameObject mt in instantiatedExtras) {
+          Destroy(mt);
+        }
+        BiomeManager.clearInstantiatedExtras();
+        GenerateMap();
+        textureScript.ApplyLayers();
     }
 }
 

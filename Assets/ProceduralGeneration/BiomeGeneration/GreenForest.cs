@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class PineForest : Biome
+public class GreenForest : Biome
 {
     private HamiltonGrid hamiltonGrid = null;
 
@@ -14,13 +14,13 @@ public class PineForest : Biome
     static readonly string propFolder;
     private int Density;
 
-    static PineForest() {
-      plainsTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/plains_2.prefab", typeof(GameObject)) as GameObject;
+    static GreenForest() {
+      plainsTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/plains_3.prefab", typeof(GameObject)) as GameObject;
       sandTexture = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Textures/sand.prefab", typeof(GameObject)) as GameObject;
-      propFolder = "Assets/Prefabs/Biomes/Props/PineForest";
+      propFolder = "Assets/Prefabs/Biomes/Props/GreenForest";
     }
-    public PineForest(float biomeStart, float biomeEnd, float propStart, float propEnd, float heightConstraintStart, float heightConstraintEnd, float BiomeDominance, int Density) 
-    : base("pine-forest", 1, sandTexture, plainsTexture, biomeStart, biomeEnd, propFolder, propStart, propEnd, heightConstraintStart, heightConstraintEnd, BiomeDominance)
+    public GreenForest(float biomeStart, float biomeEnd, float propStart, float propEnd, float heightConstraintStart, float heightConstraintEnd, float BiomeDominance, int Density) 
+    : base("green-forest", 1, sandTexture, plainsTexture, biomeStart, biomeEnd, propFolder, propStart, propEnd, heightConstraintStart, heightConstraintEnd, BiomeDominance)
     {
       this.Density = Density;
     }

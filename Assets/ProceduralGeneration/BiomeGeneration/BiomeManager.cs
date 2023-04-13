@@ -7,18 +7,18 @@ public class BiomeManager : MonoBehaviour
 {
   List<List<double>> BiomeMap;
   GameObject indirectParent;
-    int waterLayers;
-    List<int> OffsetX;
-    List<int> OffsetY;
-    int plainsLayers;
-    int sandLayers;
-    int minDepth;
-    int mountainLayers;
-    Dictionary<int, Biome> biomes;
-    Dictionary<int, GameObject> defaultTextures;
-    public BiomeManager(
-      int waterLayers,
-      int plainsLayers,
+  int waterLayers;
+  List<int> OffsetX;
+  List<int> OffsetY;
+  int plainsLayers;
+  int sandLayers;
+  int minDepth;
+  int mountainLayers;
+  Dictionary<int, Biome> biomes;
+  Dictionary<int, GameObject> defaultTextures;
+  public BiomeManager(
+    int waterLayers,
+    int plainsLayers,
       int sandLayers,
       int mountainLayers,
       int width,
@@ -36,10 +36,7 @@ public class BiomeManager : MonoBehaviour
       this.minDepth = minDepth;
       OffsetX = new List<int>();
       OffsetY = new List<int>();
-      for(int i = 0; i < 3; i++) {
-        OffsetX.Add(UnityEngine.Random.Range(-10000, +10000));
-        OffsetY.Add(UnityEngine.Random.Range(-10000, +10000));
-      }
+      SeedGenerator.fillOffsets2(OffsetX, OffsetY);
       SetupBiomes();
       BiomeMap = new List<List<double>>();
       float range = BiomeRange();
@@ -55,21 +52,17 @@ public class BiomeManager : MonoBehaviour
     foreach (KeyValuePair<int, Biome> entry in biomes)
     {
       if(entry.Value.Name.Equals(identifier)) {
-        for(int i = 0; i < BiomeMap.Count; i++) {
-          for(int j = 0; j < BiomeMap[i].Count; j++) {
-            if(height[i][j] >= waterLayers+sandLayers && height[i][j] < waterLayers+sandLayers+plainsLayers) {
-              entry.Value.GenerationStrategy(BiomeMap, i,j, height[i][j], indirectParent);
-            }
-          }
-        }
+        entry.Value.GenerationStrategy(BiomeMap, height, indirectParent);
       }
     }
   }
 
   private void SetupBiomes() {
     this.biomes = new Dictionary<int, Biome>();
-    Biome pineForest = new PineForest(0.7f, 1.1f, 0.7f, 1.1f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 10,2);
+    Biome pineForest = new PineForest(0.7f, 1.1f, 0.7f, 1.1f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 10,7);
+    Biome greenForest = new GreenForest(1.2f, 1.3f, 1.2f, 1.3f, waterLayers+sandLayers, waterLayers+sandLayers+plainsLayers-1f, 8,9);
     this.biomes.Add(1, pineForest);
+    this.biomes.Add(2, greenForest);
   }
 
   private double FindPerlin(int x, int y, float range)
@@ -120,6 +113,14 @@ public class BiomeManager : MonoBehaviour
     }
     Debug.Log("Max was found to be " + max);
     return max;
+  }
+
+  public void clearInstantiatedExtras() {
+    foreach(KeyValuePair<int, Biome> entry in biomes) {
+      foreach(GameObject c in entry.Value.instantiatedExtras) {
+        Destroy(c);
+      }
+    }
   }
 
 }

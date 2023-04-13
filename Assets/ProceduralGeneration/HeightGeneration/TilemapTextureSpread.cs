@@ -85,8 +85,11 @@ public class TilemapTextureSpread : MonoBehaviour
 
     public Dictionary<int, GameObject> cleanLayers(Dictionary<int, GameObject> fabs, int w, int h)
     {   
+        textureData.Clear();
+        las.Clear();
         foreach (KeyValuePair<int, GameObject> prefab_pair in fabs)
         {
+            Destroy(GameObject.Find(prefab_pair.Key.ToString() + "_texture_layer"));
             GameObject go = Instantiate(prefab_pair.Value);
             go.name = prefab_pair.Key.ToString() + "_texture_layer";
             SpriteRenderer sr = go.GetComponent<SpriteRenderer>();
@@ -162,6 +165,7 @@ public class TilemapTextureSpread : MonoBehaviour
         prefabs.Add("sand", sand);
         prefabs.Add("plains", plains);
         prefabs.Add("plains_2", plains);
+        prefabs.Add("plains_3", plains);
         prefabs.Add("hill", hills);
         prefabs.Add("water", water);
     }

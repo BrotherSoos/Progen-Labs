@@ -20,6 +20,8 @@ public abstract class Biome: MonoBehaviour
 
     public float BiomeDominance;
 
+    public List<GameObject> instantiatedExtras;
+
     public Biome(
       string name,
       int uid,
@@ -45,6 +47,7 @@ public abstract class Biome: MonoBehaviour
       this.heightConstraintStart = heightConstraintStart;
       this.heightConstraintEnd = heightConstraintEnd;
       this.BiomeDominance = BiomeDominance;
+      this.instantiatedExtras = new List<GameObject>();
       string[] assets = AssetDatabase.FindAssets("t:prefab", new string[] {propFolder});
       this.props = new List<GameObject>();
       foreach( var guid in assets )
@@ -67,5 +70,5 @@ public abstract class Biome: MonoBehaviour
       return false;
     }
 
-    public abstract void GenerationStrategy(List<List<double>> noise, int x, int y, float height, GameObject parent);
+    public abstract void GenerationStrategy(List<List<double>> noise, List<List<float>> heightMap, GameObject parent);
 }
