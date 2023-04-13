@@ -127,6 +127,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 292876454}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &12089780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5227798589453895893, guid: d32ecc3b224f8421c957844284c7d9c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 292876454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &20603559 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5227798588695502792, guid: d32ecc3b224f8421c957844284c7d9c5,
@@ -282,6 +288,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227798589324426302, guid: d32ecc3b224f8421c957844284c7d9c5,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1595237958}
+    - target: {fileID: 5227798589324426302, guid: d32ecc3b224f8421c957844284c7d9c5,
+        type: 3}
+      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReadStringInput
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d32ecc3b224f8421c957844284c7d9c5, type: 3}
@@ -1883,7 +1899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textPrefabs: {fileID: 8797863947267616163, guid: f341b997f95206f48891ba6fdeaec7fc,
     type: 3}
-  scaleSlider: {fileID: 0}
+  scaleSlider: {fileID: 12089780}
 --- !u!4 &1595237959
 Transform:
   m_ObjectHideFlags: 0
