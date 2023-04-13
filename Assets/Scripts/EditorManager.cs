@@ -25,6 +25,8 @@ public class EditorManager : MonoBehaviour
             mouseXStart = Input.mousePosition.x;
             mouseYStart = Input.mousePosition.y;
 
+            Debug.Log(mouseXStart);
+
             Vector2 screenPos = new Vector2(mouseXStart, mouseYStart);
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
@@ -36,6 +38,8 @@ public class EditorManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0) && currentButtonPressed < 16 && itemButtons[currentButtonPressed].clicked)
         {
+
+            Debug.Log(scaleSlider.GetComponent<Slider>().value);
             itemButtons[currentButtonPressed].clicked = false;
             Vector2 screenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);

@@ -20,8 +20,8 @@ public class ItemController : MonoBehaviour
     public void ButtonClicked()
     {
         clicked = true;
-        
 
+        Debug.Log(scaleSlider.GetComponent<Slider>().value);
         Vector2 screenPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
         GameObject go = Instantiate(editor.itemImage[ID], new Vector3(worldPos.x, worldPos.y, 0), Quaternion.identity);

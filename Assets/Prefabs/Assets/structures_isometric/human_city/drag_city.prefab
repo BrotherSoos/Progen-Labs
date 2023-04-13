@@ -94,5 +94,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7d1633abcef7a4888f032b9fc95bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleSlider: {fileID: 3208242415174085497, guid: 63d09cc971aeffe4281b149d2a018de4,
+  scaleSlider: {fileID: 5693656158112623805, guid: 63d09cc971aeffe4281b149d2a018de4,
     type: 3}

@@ -46,6 +46,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneWayDrag
       objectReference: {fileID: 0}
+    - target: {fileID: 1258632004975515619, guid: 67da9eeaa99203f4ab8852801696f90d,
+        type: 3}
+      propertyPath: m_TagString
+      value: ItemImage
+      objectReference: {fileID: 0}
     - target: {fileID: 5386004339780971919, guid: 67da9eeaa99203f4ab8852801696f90d,
         type: 3}
       propertyPath: m_RootOrder

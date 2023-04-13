@@ -86,6 +86,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: drag_sand
       objectReference: {fileID: 0}
+    - target: {fileID: 7491674949309034060, guid: 0df093a26c13cf746a3e3a7f282f2fd1,
+        type: 3}
+      propertyPath: m_TagString
+      value: ItemImage
+      objectReference: {fileID: 0}
     - target: {fileID: 8367735298697890221, guid: 0df093a26c13cf746a3e3a7f282f2fd1,
         type: 3}
       propertyPath: m_Color.a
