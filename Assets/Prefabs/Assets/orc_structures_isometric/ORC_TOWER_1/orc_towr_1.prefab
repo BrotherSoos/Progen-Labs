@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2160924186691545950}
   - component: {fileID: -67245907741075410}
   - component: {fileID: 2416078136833760029}
+  - component: {fileID: -4658958150423675393}
   m_Layer: 0
   m_Name: orc_towr_1
   m_TagString: Untagged
@@ -123,3 +124,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.15, y: 1.6}
   m_EdgeRadius: 0
+--- !u!114 &-4658958150423675393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865622473451671311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdbb81db2d71f144bb6bcdb39eb2d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

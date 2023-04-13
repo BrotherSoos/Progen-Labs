@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7284475332371538836}
   - component: {fileID: -3982701428934657418}
   - component: {fileID: 1889036471728342455}
+  - component: {fileID: 6782874853685982389}
   m_Layer: 0
   m_Name: village
   m_TagString: Untagged
@@ -123,3 +124,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &6782874853685982389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831317282526954092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdbb81db2d71f144bb6bcdb39eb2d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
