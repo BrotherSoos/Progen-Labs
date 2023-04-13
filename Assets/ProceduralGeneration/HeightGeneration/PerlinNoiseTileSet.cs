@@ -25,9 +25,9 @@ public class PerlinNoiseTileSet : MonoBehaviour
     public int MapWidth = 1000;
     public int MapHeight = 1000;
 
-    int waterLayers = 8;
-        int sandLayers = 1;
-        int plainsLayers = 5;
+    public int waterLayers = 8;
+    public int sandLayers = 1;
+    public int plainsLayers = 5;
         int hillLayers = 7;
 
     private int renderProgress = 0;
@@ -67,7 +67,7 @@ public class PerlinNoiseTileSet : MonoBehaviour
         Debug.Log("Done ---");
     }
 
-    private void GenerateMap()
+    public void GenerateMap()
     {
       BiomeManager = new BiomeManager(waterLayers, plainsLayers, sandLayers, hillLayers, MapWidth, MapHeight, 3,  tileset, gameObject);
       heightLevelGrid = new List<List<int>>();
