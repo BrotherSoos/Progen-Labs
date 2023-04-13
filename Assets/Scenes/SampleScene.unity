@@ -9653,6 +9653,9 @@ GameObject:
   - component: {fileID: 1822917720}
   - component: {fileID: 1822917721}
   - component: {fileID: 1822917722}
+  - component: {fileID: 1822917725}
+  - component: {fileID: 1822917724}
+  - component: {fileID: 1822917723}
   m_Layer: 5
   m_Name: Settings Popup
   m_TagString: Untagged
@@ -9741,11 +9744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b9b458c0bbd7e64da80e3714a4ffd78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 2076072057}
-  _text: {fileID: 1031055420}
-  perlinNoiseTileSet: {fileID: 637702876}
-  textureScript: {fileID: 637702873}
-  generateMapButton: {fileID: 1823833472}
 --- !u!114 &1822917721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9758,11 +9756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e77c6ceac1f5c45817cb932c448b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 573008589}
-  _text: {fileID: 1882015084}
-  perlinNoiseTileSet: {fileID: 637702876}
-  textureScript: {fileID: 637702873}
-  generateMapButton: {fileID: 1823833472}
 --- !u!114 &1822917722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9775,8 +9768,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc0a2d835a730d498c2494e0dffccc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1822917723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822917716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb491172a9f292c499f33b63abafc341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _slider: {fileID: 1832242636}
   _text: {fileID: 1738962137}
+  perlinNoiseTileSet: {fileID: 637702876}
+  textureScript: {fileID: 637702873}
+  generateMapButton: {fileID: 1823833472}
+--- !u!114 &1822917724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822917716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8756e195496f2d458c34827cdd8e850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 573008589}
+  _text: {fileID: 1882015084}
+  perlinNoiseTileSet: {fileID: 637702876}
+  textureScript: {fileID: 637702873}
+  generateMapButton: {fileID: 1823833472}
+--- !u!114 &1822917725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822917716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b674fba7579ea849bb851e773ed09da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 2076072057}
+  _text: {fileID: 1031055420}
   perlinNoiseTileSet: {fileID: 637702876}
   textureScript: {fileID: 637702873}
   generateMapButton: {fileID: 1823833472}
